@@ -72,3 +72,75 @@ void index_p4(Valores* v1, Valores* v2, Valores* v3, int constante){
     }
     IO_println("");
 }
+
+void index_p6(Matriz* m1,Matriz* m2){
+    if(verificarMatriz(m1) && verificarMatriz(m2)){
+        IO_printf("Matriz Original: \n");
+        indexMatriz(m1);
+        IO_printf("Matriz Transposta: \n");
+        indexMatriz(m2);
+    } else {
+        IO_printf("Uma ou mais matrizes não existem!");
+    }
+    IO_println("");
+}
+
+void index_p7(Matriz* m, bool resposta){
+    if(verificarMatriz(m)){
+        IO_printf("Matriz: \n");
+        indexMatriz(m);
+        if(resposta){
+            IO_printf("A matriz contem somente zeros!\n");
+        } else {
+            IO_printf("A matriz não contem somente zeros!\n");
+        }
+    } else {
+        IO_printf("A matriz não existe!");
+    }
+    IO_println("");
+}
+
+void index_p8(Matriz* m1,Matriz* m2, bool resposta){
+    if(verificarMatriz(m1) && verificarMatriz(m2)){
+        IO_printf("Matriz 1: \n");
+        indexMatriz(m1);
+        IO_printf("Matriz 2: \n");
+        indexMatriz(m2);
+        if(resposta){
+            IO_printf("As matrizes são iguais!\n");
+        } else {
+            IO_printf("As matrizes não são iguais!\n");
+        }
+    } else {
+        IO_printf("Uma ou mais matrizes não existem!");
+    }
+    IO_println("");
+}
+
+void index_p9(Matriz* m1,Matriz* m2, Matriz* m3, int constante){
+    if(verificarMatriz(m1) && verificarMatriz(m2) && verificarMatriz(m3)){
+        IO_printf("Matriz 1: \n");
+        indexMatriz(m1);
+        IO_printf("Matriz 2: \n");
+        indexMatriz(m2);
+        IO_printf("Resultado das duas matrizes adicionadas com a constante [%d]: \n", constante);
+        indexMatriz(m3);
+    } else {
+        IO_printf("Uma ou mais matrizes não existem!");
+    }
+    IO_println("");
+}
+
+void index_p10(Matriz* m1,Matriz* m2, Matriz* m3){
+    if(verificarMatriz(m1) && verificarMatriz(m2) && verificarMatriz(m3)){
+        IO_printf("Matriz 1: \n");
+        indexMatriz(m1);
+        IO_printf("Matriz 2: \n");
+        indexMatriz(m2);
+        IO_printf("Resultado da multiplicação das matrizes: \n");
+        indexMatriz(m3);
+    } else {
+        IO_printf("Uma ou mais matrizes não existem!");
+    }
+    IO_println("");
+}
