@@ -87,7 +87,7 @@ char* p5(bool execute){
 
         pegarValores(arranjo, arquivo_nome);
 
-        isDecrescent = is_arrayDecrescent(arranjo.valores,arranjo.length);
+        isDecrescent = is_arrayDecrescent(arranjo->valores,arranjo->length);
         index_p5(arranjo, isDecrescent);
 
         deleteValores(arranjo);

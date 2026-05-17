@@ -13,14 +13,19 @@ bool arrayCompare(Valores* v1, Valores* v2){
 }
 
 void arrayAdd(Valores* v1, Valores* v2,Valores* v3,int constante){
-    int n = v1->length;
-    v3->valores = (int*) malloc(sizeof(int)*v1->length);
-    if(v2->length > v1->length){
-        v3->valores = (int*) realloc(v3->valores,sizeof(int)*v2->length);
-        n = v2->length;
-    }
-    for(int i = 0; i < n; i = i + 1){
-        v3->valores[i] = v1->valores[i] + (v2->valores[i] * constante);
+    if(verificarValores(v1) && verificarValores(v2) && v3 != NULL){
+        int n = v1->length;
+        v3->valores = (int*) malloc(sizeof(int)*v1->length);
+        if(v2->length > v1->length){
+            v3->valores = (int*) realloc(v3->valores,sizeof(int)*v2->length);
+            n = v2->length;
+        }
+        v3->length = n;
+        for(int i = 0; i < n; i = i + 1){
+            v3->valores[i] = v1->valores[i] + (v2->valores[i] * constante);
+        }
+    } else {
+        IO_printf("Não foi possivel pegar a resultante do seu arranjo!");
     }
 }
 

@@ -8,6 +8,7 @@
 #include <math.h>      
 #include <time.h>      
 #include <wchar.h>     
+#include <limits.h>
 
 /**
    IO_lib - v2022-1

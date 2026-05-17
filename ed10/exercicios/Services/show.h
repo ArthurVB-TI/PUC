@@ -73,6 +73,21 @@ void index_p4(Valores* v1, Valores* v2, Valores* v3, int constante){
     IO_println("");
 }
 
+void index_p5(Valores* v, bool resposta){
+    if(verificarValores(v)){
+        IO_printf("Arranjo: \n");
+        indexValores(v);
+        if(resposta){
+            IO_printf("O arranjo está em ordem decrescente!\n");
+        } else {
+            IO_printf("O arranjo não está em ordem decrescente!\n");
+        }
+    } else {
+        IO_printf("Seus valores não existem!");
+    }
+    IO_println("");
+}
+
 void index_p6(Matriz* m1,Matriz* m2){
     if(verificarMatriz(m1) && verificarMatriz(m2)){
         IO_printf("Matriz Original: \n");
