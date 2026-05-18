@@ -31,7 +31,7 @@ Valores* createValores(){
     Valores* retorno = (Valores*) malloc(sizeof(Valores)*1);
     int tamanho = lerQuantidade();
     
-    if(tamanho > 0){
+    if(tamanho > 0 && retorno != NULL){
         retorno->length = tamanho;
         retorno->index = 0;
         retorno->valores = (int*) malloc(sizeof(int)*tamanho);
@@ -43,9 +43,13 @@ Valores* createValores(){
 
 Valores* createValoresVazio(){
     Valores* retorno = (Valores*) malloc(sizeof(Valores)*1);
-    retorno->length = 0;
-    retorno->index = 0;
-    retorno->valores = NULL;
+    if(retorno != NULL){
+        retorno->length = 0;
+        retorno->index = 0;
+        retorno->valores = NULL;
+    } else {
+        retorno = NULL;
+    }
     return retorno;
 }
 

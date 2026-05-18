@@ -8,6 +8,7 @@
 #include <math.h>      
 #include <time.h>      
 #include <wchar.h>     
+#include <limits.h>
 
 /**
    IO_lib - v2022-1
@@ -416,6 +417,66 @@ static inline double** IO_fIndexMatriz_Double(char* arquivo_name,int *i, int *j)
     }
 
     // Finalização
+    fclose(arquivo);
+    return retorno;
+}
+
+static inline int** IO_fIndexMatriz_Int(char* arquivo_name, int *i, int *j){
+    int** retorno = (int**) malloc(sizeof(int*) * STR_SIZE);
+    int valores[STR_SIZE];
+    int index = 0;
+    int index_V = 0;
+    int coluna = 0;
+
+    FILE* arquivo = fopen(arquivo_name, "rt");
+    int Tamanho = 100;
+    int n = 0;
+    char linha[100];
+
+    char PalavraChave[] = "Matriz:";
+    char PalavraFinal[] = "End";
+    bool PalavraEncontrada = false;
+    bool Armazenando = false;
+
+    while(!feof(arquivo) && fgets(linha, Tamanho, arquivo)){
+        n = strlen(linha) - 1;
+        if(PalavraEncontrada){
+            retorno[index] = (int*) malloc(sizeof(int) * STR_SIZE);
+            coluna = 0;
+            for(int k = 0; k < n; k = k + 1){
+                if(Armazenando){
+                    if(linha[k] >= '0' && linha[k] <= '9'){
+                        valores[index_V] = (int) linha[k] - 48;
+                        index_V = index_V + 1;
+                    } else {
+                        int resultado = 0;
+                        for(int m = 0; m < index_V; m = m + 1){
+                            resultado = resultado * 10 + valores[m];
+                        }
+                        retorno[index][coluna] = resultado;
+                        coluna = coluna + 1;
+                        index_V = 0;
+                        Armazenando = false;
+                    }
+                } else {
+                    if(linha[k] >= '0' && linha[k] <= '9'){
+                        if(k == 0 || linha[k-1] == ' ' || linha[k-1] == '\t'){
+                            index_V = 0;
+                            valores[index_V] = (int) linha[k] - 48;
+                            Armazenando = true;
+                            index_V = index_V + 1;
+                        }
+                    }
+                }
+            }
+            *j = coluna;
+            index = index + 1;
+            if(IO_procurar(linha, PalavraFinal)){ PalavraEncontrada = false; }
+        }
+        if(IO_procurar(linha, PalavraChave)){ PalavraEncontrada = true; }
+    }
+    *i = index;
+
     fclose(arquivo);
     return retorno;
 }
