@@ -730,4 +730,8 @@ int IO_readValue(){
     return retorno;
 }
 
+int intModule(int x){
+    return (x < 0 ? -x : x);
+}
+
 #endif
