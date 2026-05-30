@@ -1,5 +1,5 @@
 typedef struct array{
-    int* data;
+    double* data;
     int length;
     int index;
 } array;
@@ -14,7 +14,7 @@ array* createArray(){
 
 void updateArray(array* a, int qtde){
     if(a != NULL && qtde > 0){
-        a->data = (int*)malloc(sizeof(int)*qtde);
+        a->data = (double*)malloc(sizeof(double)*qtde);
         a->length = qtde;
         a->index = 0;
     }
@@ -24,21 +24,17 @@ void getArray(array* a, char* arquivo_nome){
     FILE* arquivo = fopen(arquivo_nome, "r");
     int n = 0;
     int i = 0;
-    bool v = false;
-    int valorAtual = 0;
+    double valorAtual = 0.0;
     char lixo[100];
     if(arquivo != NULL){
-        if(a->data != NULL){
-            fscanf(arquivo, "%d", &n);
-            updateArray(a, n);
-            while(!feof(arquivo) && i < n){
-                v = fscanf(arquivo, "%d", &valorAtual);
-                if(!v){
-                    a->data[a->index] = valorAtual;
-                } else {
-                    fgets(lixo,sizeof(lixo),arquivo);
-                }
-                i = i + 1; 
+        fscanf(arquivo, "%d", &n);
+        updateArray(a, n);
+        while(!feof(arquivo) && i < n){
+            if(fscanf(arquivo, "%*[^:]: %lf", &valorAtual) == 1){
+                a->data[i] = valorAtual;
+                i = i + 1;
+            } else {
+                fgets(lixo, sizeof(lixo), arquivo);
             }
         }
         fclose(arquivo);
@@ -48,9 +44,64 @@ void getArray(array* a, char* arquivo_nome){
 void indexArray(array* a){
     if(a->data != NULL){
         for(a->index = 0; a->index < a->length; a->index = a->index + 1){
-            IO_printf("%d\n",a->data[a->index]);
+            IO_printf("%lf\n",a->data[a->index]);
         }
     }
+}
+
+double getMaior(array* a){
+    double maior = -1.0;
+    if(a->data != NULL){
+        maior = a->data[0];
+        for(a->index = 1; a->index < a->length; a->index = a->index + 1){
+            if(maior < a->data[a->index]){
+                maior = a->data[a->index];
+            }
+        }
+    }
+    return maior;
+}
+
+double getMenor(array* a){
+    double menor = 0.0;
+    if(a->data != NULL){
+        menor = a->data[0];
+        for(a->index = 1; a->index < a->length; a->index = a->index + 1){
+            if(menor > a->data[a->index]){
+                menor = a->data[a->index];
+            }
+        }
+    }
+    return menor;
+}
+
+double getMedia(array* a){
+    double media = 0.0;
+    if(a->data != NULL){
+        for(a->index = 0; a->index < a->length; a->index = a->index + 1){
+            media = media + a->data[a->index];
+        }
+    }
+    return (media / (double) a->length);
+}
+
+double getMediaSemExtremos(array* a){
+    double media = 0.0;
+    double maior = getMaior(a);
+    double menor = getMenor(a);
+    int count = 0;
+    bool removeuMaior = false;
+    bool removeuMenor = false;
+    if(a->data != NULL){
+        for(a->index = 0; a->index < a->length; a->index = a->index + 1){
+            if(!removeuMaior && a->data[a->index] == maior){ removeuMaior = true; continue; }
+            if(!removeuMenor && a->data[a->index] == menor){ removeuMenor = true; continue; }
+            media = media + a->data[a->index];
+            count = count + 1;
+        }
+    }
+    if(count > 0){ return (media / (double) count); }
+    return 0.0;
 }
 
 void deleteArray(array* a){

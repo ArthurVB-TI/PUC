@@ -1,45 +1,78 @@
 #include "io.h"
 #include "pares.h"
 #include "array.h"
+#include "logic.h"
 
 void method_01(){
     pares* par = createPares();
     char* arquivo_nome1 = "DADOS_1.TXT";
     char* arquivo_nome2 = "SAIDA_1.TXT";
-    int n = 0;
 
-    n = IO_readint("Digite uma quantidade: ");
-    updatePares(par,n);
-
-    randomPares(par);
-    updateDistancia(par);
+    lerParesDeArquivo(par, arquivo_nome1);
+    calcularDistanciasConsecutivas(par);
 
     indexPares(par);
-    indexParesDistancia(par);
+    for(int i = 0; i < par->length - 1; i = i + 1){
+        IO_printf("dist(%d,%d): %lf\n", i, i+1, par->distancia[i]);
+    }
 
-    gravarPares(par,arquivo_nome1);
-    gravarDistancias(par, arquivo_nome2);
-
+    gravarDistanciasConsecutivas(par, arquivo_nome2);
     deletePares(par);
 }
 
 void method_02(){
     array* arranjo = createArray();
     char* arquivo_nome = "SAIDA_1.TXT";
+    double maior = 0.0;
+    double menor = 0.0;
 
-    getArray(arranjo,arquivo_nome);
+    getArray(arranjo, arquivo_nome);
+    maior = getMaior(arranjo);
+    menor = getMenor(arranjo);
+
+    index_m2(arranjo, maior, menor);
+    deleteArray(arranjo);
 }
 
 void method_03(){
+    array* arranjo = createArray();
+    char* arquivo_nome = "SAIDA_1.TXT";
+    double media = 0.0;
 
+    getArray(arranjo, arquivo_nome);
+    media = getMediaSemExtremos(arranjo);
+
+    index_m3(arranjo, media);
+    deleteArray(arranjo);
 }
 
 void method_04(){
+    matrizPares* m = createMatrizPares();
+    char* arquivo_nome = "DADOS_1.TXT";
 
+    lerMatrizParesDeArquivo(m, arquivo_nome);
+    IO_printf("Antes da ordenacao:\n");
+    indexMatrizPares(m);
+
+    ordenarMatrizPares(m);
+    IO_printf("\nApos a ordenacao:\n");
+    indexMatrizPares(m);
+
+    deleteMatrizPares(m);
 }
 
 void method_05(){
+    matrizPares* m = createMatrizPares();
+    char* arquivo_nome = "DADOS_1.TXT";
 
+    lerMatrizParesDeArquivo(m, arquivo_nome);
+    ordenarMatrizPares(m);
+    indexMatrizPares(m);
+
+    double dist = distanciaPrimeiroUltimo(m);
+    IO_printf("\nDistancia entre primeiro e ultimo par ordenados: %lf\n", dist);
+
+    deleteMatrizPares(m);
 }
 
 int main ( int argc, char* argv [ ] )
