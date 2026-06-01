@@ -40,8 +40,6 @@ class arranjo {
         }
 
         void resetArray() {
-            delete[] array;
-            array = new int[qtde];
             tamanho = 0;
             index = 0;
         }
@@ -132,8 +130,10 @@ int pegarValores() {
     }
 
     int resultadoFinal = ultimoNivelDetectado;
-    mostrarValores(resultadoFinal);
-    delay(300);
+    if (resultadoFinal > 0) {
+        mostrarValores(resultadoFinal);
+        delay(300);
+    }
     reset();
     return resultadoFinal;
 }
@@ -201,7 +201,7 @@ void durante(arranjo* a) {
             continuar = false;
         } else {
             a->addArray();
-            if (a->tamanho == 5) {
+            if (a->tamanho % 5 == 0) {
                 aumentarNivel();
             }
         }
@@ -234,7 +234,6 @@ void loop() {
         durante(a);
     }
 
-    a->resetArray();
     delete a;
     a = NULL;
     reset();
