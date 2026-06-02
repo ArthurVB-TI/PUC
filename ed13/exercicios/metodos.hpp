@@ -38,5 +38,7 @@ void m5(){
 }
 
 void m6(){
+    Usuario* u = new Usuario();
+
     
 }

@@ -6,21 +6,26 @@ class Usuario{
         telefone* telf; 
         /* 
             Pensei em colocar telf em protected e atribuir uma herança,
-            porem achei melhor não
+            mas achei melhor não
         */
     public:
         void init_usuario(){
             this->telf = new telefone();
             this->nome = "";
         }
+        void init_usuario(string n, telefone* t){
+            this->nome = n;
+            this->telf = t;
+        }
         Usuario(){ init_usuario(); }
+        Usuario(string n, telefone* t){ init_usuario(n,t); }
         string getNome(){ return this->nome; }
         void updateNome(string n){ this->nome = n; }
 
         bool verificarNome(string n){
             bool v = true;
-            for(int i = 0; i <= n.length() && !v; i = i + 1){
-                if(n[i] != ' ' && !((n[i] <='A' && n[i] >= 'Z') || (n[i] <= 'a' && n[i] >= 'z'))){
+            for(int i = 0; i < n.length() && v; i = i + 1){
+                if(n[i] != ' ' && !((n[i] >= 'A' && n[i] <= 'Z') || (n[i] >= 'a' && n[i] <= 'z'))){
                     v = false;
                 }
             }

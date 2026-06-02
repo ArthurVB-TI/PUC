@@ -7,11 +7,11 @@ void testFile(string arquivo_nome){
 void readFromFile(Usuario* u,string arquivo_nome){
     testFile(arquivo_nome);
     FILE* arquivo = fopen(arquivo_nome.c_str(), "rt");
-    string nome = "";
+    char buffer[100];
 
-    fgets(&nome[0], 100, arquivo);
-    
-    if(nome != ""){
+    if(fgets(buffer, 100, arquivo)){
+        string nome(buffer);
+        if(!nome.empty() && nome.back() == '\n') nome.pop_back();
         u->updateNome(nome);
     }
 
