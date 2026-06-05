@@ -1,5 +1,10 @@
-void index(matriz<int>* Matriz,bool ordem){
-    std::cout << "A matriz: " << endl;
-    Matriz->indexMatriz();
-    std::cout << (ordem ? "Está em ordem" : "Não está em ordem") << endl;
+void index_e1(Usuario* u){
+    u->indexNome();
+    u->indexTelefones();
+}
+
+void index_e2(UsuarioE2* u){
+    u->indexNome();
+    u->indexTelefones();
+    u->indexEnderecos();
 }

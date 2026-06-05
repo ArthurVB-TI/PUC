@@ -14,7 +14,7 @@ int main()
         cout << "1 - Metodo 1: " << endl;
         cout << "2 - Metodo 2: " << endl;
 
-        opcoes = IO_readOpcao();
+        opcoes = IO_readint("Digite sua opção: ");
         switch(opcoes)
         {
             case 0: break;

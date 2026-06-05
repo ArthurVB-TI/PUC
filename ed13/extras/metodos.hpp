@@ -1,23 +1,22 @@
 void e1(){
-    matriz<int>* Matriz = new matriz<int>();
-    bool is_inOrdem = false;
+    Usuario* u = new Usuario();
 
-    Matriz->setMatrizLength();
-    Matriz->setRandomMatriz();
+    u->setNome("Digite o nome: ");
+    u->addPhone("Telefone 1: ");
+    u->addPhone("Telefone 2: ");
+    u->addPhone("Telefone 3: ");
 
-    is_inOrdem = deCimaPraBaixo(Matriz);
-
-    index(Matriz,is_inOrdem);
+    index_e1(u);
 }
 
 void e2(){
-    matriz<int>* Matriz = new matriz<int>();
-    bool is_inOrdem = false;
+    UsuarioE2* u = new UsuarioE2();
 
-    Matriz->setMatrizLength();
-    Matriz->setRandomMatriz();
+    u->setNome("Digite o nome: ");
+    u->addPhone("Telefone 1: ");
+    u->addPhone("Telefone 2: ");
+    u->setEndResidencial("Endereco residencial: ");
+    u->setEndProfissional("Endereco profissional: ");
 
-    is_inOrdem = deBaixoPraCima(Matriz);
-
-    index(Matriz,is_inOrdem);
+    index_e2(u);
 }

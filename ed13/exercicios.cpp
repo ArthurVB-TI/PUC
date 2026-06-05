@@ -31,11 +31,11 @@ int main()
             case 3: cout << endl; m3(); break;
             case 4: cout << endl; m4(); break;
             case 5: cout << endl; m5(); break;
-            //case 6: cout << endl; m6(); break;
-            //case 7: cout << endl; m7(); break;
-            //case 8: cout << endl; m8(); break;
-            //case 9: cout << endl; m9(); break;
-            //case 10: cout << endl; m10(); break;
+            case 6: cout << endl; m6(); break;
+            case 7: cout << endl; m7(); break;
+            case 8: cout << endl; m8(); break;
+            case 9: cout << endl; m9(); break;
+            case 10: cout << endl; m10(); break;
             default: cout << "Opção inválida!" << endl; break;
         }
     }while(opcoes != 0);
