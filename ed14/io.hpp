@@ -1,5 +1,4 @@
  /**
-   IO - Console input/output library.
    @author  PUC-Minas - ICEI
    @version 0.1 - 2026-1
 
