@@ -49,27 +49,3 @@ int main ( int argc, char* argv[] )
     getchar();
     return 0;
 }
-
-/*
-m1: DADOS1.TXT={5: 3,1,4,2,5} -> ordena -> {5,4,3,2,1} -> DECRESCENTE.TXT
-    DADOS1.TXT={3: 5,4,3}     -> ja decrescente
-
-m2: DECRESCENTE.TXT={5: 5,4,3,2,1} -> invertido {1,2,3,4,5} -> INVERTIDOS.TXT
-
-m3: {5: 1,2,3,4,5} -> media=3.0, mediana=3
-    {4: 1,2,4,5}   -> media=3.0, proximos: 2 e 4 -> 3.0
-
-m4: DADOS1={4:1,2,3,4}, DADOS2={4:2,4,6,8} -> comuns={2,4} -> FILTRADOS.TXT
-
-m5: "1011"->11; "0000"->0; "abc"->invalido; "1"->1; "1101"->13
-
-m6: MATRIZ1.TXT=4 -> tridiagonal crescente 4x4 como no enunciado
-
-m7: MATRIZ1.TXT=4 -> tridiagonal secundaria 4x4 como no enunciado
-
-m8: MATRIZ3.TXT {{1,1,1,1},{1,2,3,4},{1,4,9,16},{1,8,27,64}} -> sim
-
-m9: MATRIZ4.TXT {{1,8,27,64},{1,4,9,16},{1,2,3,4},{1,1,1,1}} -> sim
-
-m10: DADOS3.TXT 4 supermercados: media=21.60, abaixo: Extra(10.50), SuperBom(18.90)
-*/

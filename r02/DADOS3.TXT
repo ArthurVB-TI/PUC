@@ -1,5 +1,0 @@
-4
-Extra 101 10.50
-Mercado 102 25.00
-SuperBom 103 18.90
-Atacadao 104 32.00

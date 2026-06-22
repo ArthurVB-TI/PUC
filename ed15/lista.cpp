@@ -4,13 +4,13 @@ using namespace std;
 
 void method_00 ( )
 {
-} 
+}
 
 void method_01 ( )
 {
     cout << "\nMethod_01 - v0.0\n" << endl;
     IO_pause ( "Apertar ENTER para continuar" );
-} 
+}
 
 int main ( int argc, char** argv )
 {
@@ -19,8 +19,8 @@ int main ( int argc, char** argv )
     do
     {
         cout << "EXEMPLO1500 - Programa - v0.0\n" << endl;
-        cout << "Opcoes"               << endl;
-        cout << " 0 - parar"           << endl;
+        cout << "Opcoes" << endl;
+        cout << " 0 - parar" << endl;
         cout << " 1 - testar definicoes" << endl;
 
         cout << endl << "Entrar com uma opcao: ";
