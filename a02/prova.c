@@ -283,6 +283,95 @@ int q6(){
 }
 
 // q7
+void organizar(char* a_n1,char* a_n2){
+    FILE* arquivo_read = fopen(a_n1,"rt");
+    FILE* arquivo = fopen(a_n2,"wt");
+    int count_zero = 0;
+    int index = 0;
+    int valorAtual = 0;
+    char lixo[100] = "";
+
+    // Contar quantos zeros possui
+    while(!feof(arquivo_read)){
+        if(fscanf(arquivo_read,"%d",&valorAtual)){
+            if(!valorAtual) count_zero = count_zero + 1;
+            index = index + 1;
+        } else {
+            fgets(lixo,100,arquivo_read);
+        }
+    }
+
+    // Colocar estes zeros
+    for(int i = 0; i < count_zero; i = i + 1){
+        fprintf(arquivo,"%d ",0);
+    }
+
+    // Resetar a leitura do arquivo de leitura
+    fclose(arquivo_read);
+    FILE* arquivo_read = fopen(a_n1,"rt");
+
+    // Colocar todos os valores que forem diferentes de 0
+    while(!feof(arquivo_read)){
+        if(fscanf(arquivo_read,"%d",&valorAtual)){
+            if(valorAtual){
+                fprintf(arquivo,"%d ",valorAtual);
+            }
+        } else {
+            fgets(lixo,100,arquivo_read);
+        }
+    }
+    fclose(arquivo_read);
+    fclose(arquivo);
+}
+
+int q7(){
+    organizar("DADOS.TXT","SAIDA.TXT");
+}
+
+// q8
+// Função pra alterar a posição do jogador descendo na matriz linearmente
+void alterar_posicao(int m, int n, int* linha_atual, int* coluna_atual, int penalidade){
+    // Converter de matriz pra vetor
+    int posicao_linear = (*linha_atual) * n + (*coluna_atual);
+
+    // Aplicar a penalidade para descer posições na tabela
+    posicao_linear = posicao_linear + penalidade;
+
+    // Restrição: Jogador não pode ser "expulso" (ultrapassar o limite da matriz)
+    int limite_maximo = (m * n) - 1;
+    if(posicao_linear > limite_maximo){
+        posicao_linear = limite_maximo;
+    }
+
+    // Converter de volta a posição linear para coordenadas da matriz
+    *linha_atual = posicao_linear / n;
+    *coluna_atual = posicao_linear % n;
+}
+
+int q8(){
+    int m = 0, n = 0;
+    int linha_jogador = 0, coluna_jogador = 0;
+    int penalidade = 0;
+
+    // Pegar os valores das dimensões da tabela (m x n)
+    printf("Digite as dimensões da tabela (m n): ");
+    if(!scanf("%d", &m)) m = 0;
+    if(!scanf("%d", &n)) n = 0; getchar();
+
+    // Pegar a posição atual do jogador na matriz
+    printf("Digite a linha e coluna atual do jogador: ");
+    if(!scanf("%d", &linha_jogador)) linha_jogador = 0;
+    if(!scanf("%d", &coluna_jogador)) coluna_jogador = 0; getchar();
+    
+    // Pegar a quantidade de posições a descer
+    printf("Digite a quantidade de posições da penalidade: ");
+    if(!scanf("%d", &penalidade)) penalidade = 0; getchar();
+
+    // Chamar o procedimento passando os ponteiros das coordenadas do jogador
+    alterar_posicao(m, n, &linha_jogador, &coluna_jogador, penalidade);
+
+    printf("Nova posição depois da penalidade: \nLinha %d\nColuna %d\n", linha_jogador, coluna_jogador);
+}
 
 
 int main()
@@ -293,6 +382,7 @@ int main()
     teste_4();
     teste_5();
     q6();
-
+    q7();
+    q8();
     return 1;
 }
