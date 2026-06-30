@@ -1,19 +1,32 @@
 #include <stdio.h>
 
-int main(){
-    int a, b, c, count = 0, found = 0;
-    const int valorProcurado = 998244353;
-    scanf("%d %d %d", &a, &b, &c);
-    for(int i = 1; i <= a && !found; i++){
-        for(int j = 1; j <= b && !found; j++){
-            for(int k = 1; k <= c && !found; k++){
-                count = count + (i*j*k);
-                if(count >= valorProcurado){
-                    found = 1;
-                }
-            }
-        }
+/*
+    Precisei pesquisar pra conseguir fazer
+*/
+
+long long sum_1_to_N(long long N, long long MOD) {
+    long long term1 = N % MOD;
+    long long term2 = (N + 1) % MOD;
+    long long total = (term1 * term2) % MOD;
+    
+    return (total * 499122177) % MOD;
+}
+
+int main() {
+    long long A, B, C;
+    long long MOD = 998244353;
+
+    if (scanf("%lld %lld %lld", &A, &B, &C) != 3) {
+        return 1;
     }
-    printf("\n%d\n", count);
+
+    long long sumA = sum_1_to_N(A, MOD);
+    long long sumB = sum_1_to_N(B, MOD);
+    long long sumC = sum_1_to_N(C, MOD);
+
+    long long ans = (sumA * sumB % MOD) * sumC % MOD;
+
+    printf("%lld\n", ans);
+
     return 0;
 }
