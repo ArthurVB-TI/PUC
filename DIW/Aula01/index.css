@@ -1,0 +1,32 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-color: pink;
+    background-image: url(theldo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+#caixa1{
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 5%;
+    width: 20%;
+    height: 10%;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
