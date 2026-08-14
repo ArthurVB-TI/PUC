@@ -5,23 +5,27 @@
 
 body{
     background-color: pink;
-    background-image: url(theldo.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: end;
+    align-items: center;
+    gap: 3%;
+}
+
+#imagem{
+    max-width: 40%;
+    max-height: 50%;
+    object-fit: contain;
 }
 
 #caixa1{
     font-size: 2em;
     font-weight: bold;
-    margin-bottom: 5%;
     width: 20%;
     height: 10%;
+    flex-shrink: 0;
     border-radius: 20px;
     background-color: blue;
     color: white;
