@@ -599,7 +599,7 @@ double lerReal(){
         IO_printf("Digite um valor real: ");
         v = scanf("%lf",&retorno); getchar( );
         if(!v){ IO_printf("Valor Invalido"); }
-    }while(!v)
+    }while(!v);
 
     return retorno;
 }
@@ -687,7 +687,7 @@ void index8(double v1,double v2,double v3){
 
 // 9
 char lerChar(){
-    char retorno = '';
+    char retorno = '\0';
     bool v = false;
 
     // Ler até digitar valor real
@@ -695,7 +695,7 @@ char lerChar(){
         IO_printf("Digite um valor real: ");
         v = scanf("%c",&retorno); getchar( );
         if(!v){ IO_printf("Valor Invalido"); }
-    }while(!v)
+    }while(!v);
 
     return retorno;
 }
@@ -707,7 +707,7 @@ bool ordemCrescente_Char(char v1,char v2,char v3){
     if(!(v1 <= v2 && v2 <= v3)){
         retorno = false;
     } else {
-        if(!((v1 >= 'a' || v1 >= 'A') && (v3 <= 'z' || <='Z'))){ 
+        if(!((v1 >= 'a' || v1 >= 'A') && (v3 <= 'z' || v3 <='Z'))){ 
             retorno = false;
         }
     }
@@ -721,7 +721,7 @@ bool ordemDecrescente_Char(char v1,char v2,char v3){
     if(!(v1 >= v2 && v2 >= v3)){
         retorno = false;
     } else {
-        if(!((v1 >= 'a' || v1 >= 'A') && (v3 <= 'z' || <='Z'))){ 
+        if(!((v1 >= 'a' || v1 >= 'A') && (v3 <= 'z' || v3 <='Z'))){ 
             retorno = false;
         }
     }
@@ -772,9 +772,9 @@ char* lerCharacteres(){
     char* retorno = (char*) malloc(sizeof(char)*STR_SIZE);
 
     // Ler cadeia
-    fgets(retorno,STRI_SIZE,stdin);
+    fgets(retorno,STR_SIZE,stdin);
 
-    return retorno
+    return retorno;
 }
 
 bool ordemCrescente_String(char* c1, char* c2, char* c3)
@@ -1029,9 +1029,9 @@ void metodo8()
 void metodo9()
 {
     // Variaveis
-    char valor1 = '';
-    char valor2 = '';
-    char valor3 = '';
+    char valor1 = '\0';
+    char valor2 = '\0';
+    char valor3 = '\0';
 
     // Funções
     valor1 = lerChar();
