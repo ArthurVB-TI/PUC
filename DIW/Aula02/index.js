@@ -1,3 +1,3 @@
 function abrir(){
-    window.alert("Hello World, I'm Arthur!");
+    window.alert("Hello World!");
 }
