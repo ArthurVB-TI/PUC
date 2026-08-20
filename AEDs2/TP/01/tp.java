@@ -1,6 +1,18 @@
 import java.util.Scanner;
 
 class java{
+    private static int comparar(String texto1, String texto2, int i){
+        int retorno = 0;
+        if(i < texto1.length() && i < texto2.length()){
+            if(texto1.charAt(i) != texto2.charAt(i)){
+                retorno = 1;
+            } else {
+                retorno = retorno * comparar(texto1,texto2,i + 1);
+            }
+        }
+        return retorno;
+    }
+    private static int comparar(String texto1, String texto2) { return comparar(texto1, texto2, 0); }
     private static String cifra(String texto,int n){
         String cifra = "";
         char c = '\0';
@@ -9,6 +21,7 @@ class java{
             if((c >= 65 && c <= 90) || (c >= 97 && c <= 122)){
                 cifra = cifra + c;
             } else {
+                c = (char) (texto.charAt(i) - 26 + 3);
                 cifra = cifra + c;
             }
         }
@@ -19,7 +32,7 @@ class java{
         String texto = "";
         
         texto = sc.nextLine();
-        while(texto.compareTo("FIM") != 0){
+        while(comparar(texto,"FIM") != 0){
             texto = cifra(texto,texto.length());
             System.out.println(texto);
             texto = sc.nextLine();
