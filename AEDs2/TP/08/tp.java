@@ -13,23 +13,27 @@ class java{
         return retorno;
     }
     private static int comparar(String texto1, String texto2) { return comparar(texto1, texto2, 0); }
-    private static String cifra(String texto,int n){
-        String cifra = "";
-        char c = '\0';
-        for(int i = 0; i < n; i = i + 1){
-            c = (char) (texto.charAt(i) + 3);
-            cifra = cifra + c;
+    
+    private static boolean is_senha(String texto){
+        boolean retorno = false;
+        boolean a = false, b = false, c = false, d = false;
+        for(int i = 0; i < texto.length(); i++){
+            if(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') a = true;
+            else if(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') b = true;
+            else if(texto.charAt(i) >= '0' && texto.charAt(i) <= '9') c = true;
+            else d = true;
         }
-        return cifra;
+        retorno = (a && b && c && d && texto.length() >= 8);
+        return retorno;
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String texto = "";
 
         texto = sc.nextLine();
         while(comparar(texto,"FIM") != 0){
-            texto = cifra(texto,texto.length());
-            System.out.println(texto);
+            System.out.println((is_senha(texto) ? "SIM" : "NAO"));
             texto = sc.nextLine();
         }
 
