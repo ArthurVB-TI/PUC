@@ -9,49 +9,51 @@ public class tp {
             } else {
                 retorno = retorno + comparar(texto1,texto2,i + 1);
             }
-        } else if(texto1.length() == 0) retorno = 1;
+        } else if(texto1.length() != texto2.length()) retorno = 1;
         return retorno;
     }
     private static int comparar(String texto1, String texto2) { return comparar(texto1, texto2, 0); }
+    private static boolean vogal(char c){
+        return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+    }
+    private static boolean consoante(char c){
+        return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) && !vogal(c);
+    }
+    private static boolean digito(char c){
+        return (c >= '0' && c <= '9');
+    }
     private static boolean x1(String texto){
-        boolean retorno = false;
-        for(int i = 0; i < texto.length() && !retorno; i++){
-            char c = texto.charAt(i);
-            if(c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') 
-                retorno = true;
+        boolean retorno = (texto.length() > 0);
+        for(int i = 0; i < texto.length() && retorno; i = i + 1){
+            if(!vogal(texto.charAt(i))) retorno = false;
         }
         return retorno;
     }
     private static boolean x2(String texto){
-        boolean retorno = false;
-        for(int i = 0; i < texto.length() && !retorno; i++){
-            char c = texto.charAt(i);
-            if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) if(!(c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'))
-                retorno = true;
+        boolean retorno = (texto.length() > 0);
+        for(int i = 0; i < texto.length() && retorno; i = i + 1){
+            if(!consoante(texto.charAt(i))) retorno = false;
         }
         return retorno;
     }
     private static boolean x3(String texto){
-        boolean retorno = false;
-        for(int i = 0; i < texto.length() && !retorno; i++){
-            char c = texto.charAt(i);
-            if(c >= '1' && c <= '9')
-                retorno = true;
+        boolean retorno = (texto.length() > 0);
+        for(int i = 0; i < texto.length() && retorno; i = i + 1){
+            if(!digito(texto.charAt(i))) retorno = false;
         }
         return retorno;
     }
     private static boolean x4(String texto){
-        boolean retorno = false;
-        for(int i = 0; i < texto.length() && !retorno; i++){
+        boolean retorno = (texto.length() > 0);
+        int separadores = 0;
+        int digitos = 0;
+        for(int i = 0; i < texto.length() && retorno; i = i + 1){
             char c = texto.charAt(i);
-            if(c >= '1' && c <= '9')
-                if(texto.charAt(i + 1) == ',')
-                    {retorno = true;}
-            else 
-                if(c == ',')
-                    if(texto.charAt(i + 1) >= 'a' && texto.charAt(i + 1) <= 'z')
-                        retorno = true;
+            if(digito(c)) digitos = digitos + 1;
+            else if(c == '.' || c == ',') separadores = separadores + 1;
+            else retorno = false;
         }
+        if(separadores > 1 || digitos == 0) retorno = false;
         return retorno;
     }
     public static void main(String[] args){
@@ -61,9 +63,9 @@ public class tp {
         texto = sc.nextLine();
         while(comparar(texto,"FIM") != 0){
             System.out.println(
-                (x1(texto) ? "SIM" : "NAO") + " " + 
-                (x2(texto) ? "SIM" : "NAO") + " " + 
-                (x3(texto) ? "SIM" : "NAO") + " " + 
+                (x1(texto) ? "SIM" : "NAO") + " " +
+                (x2(texto) ? "SIM" : "NAO") + " " +
+                (x3(texto) ? "SIM" : "NAO") + " " +
                 (x4(texto) ? "SIM" : "NAO")
             );
             texto = sc.nextLine();

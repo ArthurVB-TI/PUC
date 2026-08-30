@@ -15,12 +15,11 @@ int tamanho(char* texto){
     return n;
 }
 
-char* inverter(char* texto, int n){
-    char* retorno = (char*) calloc(n + 1,sizeof(char));
-    for(int i = 0; i < n; i = i + 1){
+void inverter(char* texto, char* retorno, int n, int i){
+    if(i < n){
         retorno[i] = texto[(n-1) - i];
+        inverter(texto,retorno,n,i + 1);
     }
-    return retorno;
 }
 
 int main(){
@@ -32,7 +31,8 @@ int main(){
         n = tamanho(linha);
         linha[n] = '\0';
         if(comparar(linha,fim) == 0) break;
-        char* invertido = inverter(linha,n);
+        char* invertido = (char*) calloc(n + 1,sizeof(char));
+        inverter(linha,invertido,n,0);
         printf("%s\n",invertido);
         free(invertido);
     }

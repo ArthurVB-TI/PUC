@@ -9,25 +9,32 @@ int comparar(const char *t1, const char *t2){
     return *(unsigned char *)t1 - *(unsigned char *)t2;
 }
 
-char* cifra(char* texto, int n,int i){
-    char* retorno = (char*) calloc(n,sizeof(char));
+int tamanho(char* texto){
+    int n = 0;
+    while(texto[n] != '\n' && texto[n] != '\0') n = n + 1;
+    return n;
+}
+
+void cifra(char* texto, char* retorno, int n, int i){
     if(i < n){
-        retorno = cifra(texto,n,i + 1);
-        retorno[i] = (char)(retorno[i]+3);
-        printf("%s",retorno);
+        retorno[i] = (char) (texto[i] + 3);
+        cifra(texto,retorno,n,i + 1);
     }
-    return retorno;
 }
 
 int main(){
-    char* linha = (char*) calloc(100,sizeof(char));
-    char fim[5] = "FIM\n";
+    char* linha = (char*) calloc(1000,sizeof(char));
+    char fim[4] = "FIM";
     int n = 0;
 
-    while(fgets(linha,100,stdin) != NULL && linha[0] != '\n' && linha[0] != '\0' && comparar(linha,fim) != 0){
-        n = 0;
-        while(linha[n] != '\n' && linha[n] != '\0') n++;
-        printf("%s\n",cifra(linha,n,0));
+    while(fgets(linha,1000,stdin) != NULL){
+        n = tamanho(linha);
+        linha[n] = '\0';
+        if(comparar(linha,fim) == 0) break;
+        char* cifrado = (char*) calloc(n + 1,sizeof(char));
+        cifra(linha,cifrado,n,0);
+        printf("%s\n",cifrado);
+        free(cifrado);
     }
 
     free(linha);

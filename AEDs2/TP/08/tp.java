@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class java{
+public class tp {
     private static int comparar(String texto1, String texto2, int i){
         int retorno = 0;
         if(i < texto1.length() && i < texto2.length()){
@@ -9,7 +9,7 @@ class java{
             } else {
                 retorno = retorno + comparar(texto1,texto2,i + 1);
             }
-        } else if(texto1.length() == 0) retorno = 1;
+        } else if(texto1.length() != texto2.length()) retorno = 1;
         return retorno;
     }
     private static int comparar(String texto1, String texto2) { return comparar(texto1, texto2, 0); }

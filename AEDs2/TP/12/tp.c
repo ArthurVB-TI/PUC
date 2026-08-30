@@ -15,10 +15,11 @@ int tamanho(char* texto){
     return n;
 }
 
-char* inverter(char* texto, int n){
-    char* retorno = (char*) calloc(n + 1,sizeof(char));
-    for(int i = 0; i < n; i = i + 1){
-        retorno[i] = texto[(n-1) - i];
+int soma(char* texto, int n, int i){
+    int retorno = 0;
+    if(i < n){
+        if(texto[i] >= '0' && texto[i] <= '9') retorno = ((int) (texto[i] - 48)) + soma(texto,n,i + 1);
+        else retorno = soma(texto,n,i + 1);
     }
     return retorno;
 }
@@ -32,9 +33,7 @@ int main(){
         n = tamanho(linha);
         linha[n] = '\0';
         if(comparar(linha,fim) == 0) break;
-        char* invertido = inverter(linha,n);
-        printf("%s\n",invertido);
-        free(invertido);
+        printf("%d\n",soma(linha,n,0));
     }
 
     free(linha);

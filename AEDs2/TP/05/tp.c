@@ -9,25 +9,32 @@ int comparar(const char *t1, const char *t2){
     return *(unsigned char *)t1 - *(unsigned char *)t2;
 }
 
-int soma(char* texto, int n, int i){
+int tamanho(char* texto){
+    int n = 0;
+    while(texto[n] != '\n' && texto[n] != '\0') n = n + 1;
+    return n;
+}
+
+int soma(char* texto, int n){
     int retorno = 0;
-    if(i < n){
-        if(texto[i] >= '0' && texto[i] <= '9') retorno = ((int) (texto[i] - 48)) + soma(texto,n,i+1);
-        else retorno = soma(texto,n,i+1);
+    for(int i = 0; i < n; i = i + 1){
+        if(texto[i] >= '0' && texto[i] <= '9') retorno = retorno + ((int) (texto[i] - 48));
     }
     return retorno;
 }
 
 int main(){
-    char* linha = (char*) calloc(100,sizeof(char));
-    char fim[5] = "FIM\0";
+    char* linha = (char*) calloc(1000,sizeof(char));
+    char fim[4] = "FIM";
     int n = 0;
 
-    while(fgets(linha,100,stdin) != NULL && linha[0] != '\n' && linha[0] != '\0' && comparar(linha,fim) != 0){
-        n = 0;
-        while(linha[n] != '\n' && linha[n] != '\0') n++;
-        printf("%d\n",soma(linha,n,0));
+    while(fgets(linha,1000,stdin) != NULL){
+        n = tamanho(linha);
+        linha[n] = '\0';
+        if(comparar(linha,fim) == 0) break;
+        printf("%d\n",soma(linha,n));
     }
 
-    return 1;
+    free(linha);
+    return 0;
 }
